@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caleb Steenkamp | Portfolio</title>
+  <meta name="description" content="Caleb Steenkamp - Computer Science graduate passionate about automation, software development, and building the future.">
+  <link rel="icon" href="assets/favicon.ico" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="#" onclick="scrollToSection('about'); return false;">About</a>
+      <a href="#" onclick="scrollToSection('projects'); return false;">Projects</a>
+      <a href="#" onclick="scrollToSection('contact'); return false;">Contact</a>
+      <div class="theme-toggle">
+        <button class="theme-btn pixel-btn" onclick="toggleThemeMenu()">Theme</button>
+        <div class="theme-menu" id="theme-menu">
+          <button class="theme-option" data-theme="auto" onclick="setTheme('auto')">Auto (Time)</button>
+          <button class="theme-option" data-theme="day" onclick="setTheme('day')">Day</button>
+          <button class="theme-option" data-theme="evening" onclick="setTheme('evening')">Evening</button>
+          <button class="theme-option" data-theme="night" onclick="setTheme('night')">Night</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main style="padding-bottom: 6rem;">
+
+    <!-- About Section (with Progress carousel) -->
+    <section id="about" class="section">
+      <article class="pixel-card">
+        <div class="carousel-wrapper about-carousel">
+          <div class="carousel-track" id="about-track">
+            <!-- Slide 1: About Me -->
+            <div class="carousel-slide about-slide">
+              <h2 class="section-title">About Me</h2>
+              <p class="about-text">
+                I am a pending Computer Science graduate from Wits University, passionate about automation, software development,
+                and building systems that bridge the digital and physical worlds. I believe the future is automation, and I want
+                to play a part in shaping it through intelligent software and integrated machinery solutions.
+              </p>
+
+              <ul class="skills-list">
+                <li><strong>Languages:</strong> Java, Python, TypeScript, JavaScript, C++, C, GDScript, SQL</li>
+                <li><strong>Frameworks & Tools:</strong> React, Node.js, Express, Tailwind CSS, Godot, Git, Docker</li>
+                <li><strong>Skills:</strong> Web Development, Game Development, Algorithmic thinking, Problem Solving</li>
+                <li><strong>Experience:</strong> Xencode Internship, Tutor Doctor, University Projects, Personal Projects</li>
+              </ul>
+
+              <a href="assets/Caleb_Steenkamp_Short_CV_2026.pdf" target="_blank" rel="noopener noreferrer" class="cv-link">
+                View My CV &rarr;
+              </a>
+            </div>
+            <!-- Slide 2: Progress -->
+            <div class="carousel-slide about-slide">
+              <h2 class="section-title">My Progress</h2>
+              <div class="progress-content">
+                <div class="progress-chart-container">
+                  <canvas id="progress-chart"></canvas>
+                </div>
+                <div class="progress-highlights">
+                  <div class="highlight-item">
+                    <span class="highlight-number">5+</span>
+                    <span class="highlight-label">Projects Delivered</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="highlight-number">8</span>
+                    <span class="highlight-label">Languages with Experience</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="highlight-number">7</span>
+                    <span class="highlight-label">Frameworks & Tools</span>
+                  </div>
+                  <div class="highlight-item">
+                    <span class="highlight-number">2</span>
+                    <span class="highlight-label">Industry Roles</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="pixel-btn carousel-btn" onclick="prevAboutSlide()" aria-label="Previous">&#8249;</button>
+          <div class="carousel-dots" id="about-dots"></div>
+          <button class="pixel-btn carousel-btn" onclick="nextAboutSlide()" aria-label="Next">&#8250;</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Projects Carousel Section -->
+    <section id="projects" class="section">
+      <article class="pixel-card">
+        <h2 class="section-title">Projects</h2>
+        <div class="carousel-wrapper" onmouseenter="stopAutoplay()" onmouseleave="startAutoplay()">
+          <div class="carousel-track" id="carousel-track"></div>
+        </div>
+        <div class="carousel-controls">
+          <button class="pixel-btn carousel-btn" onclick="prevSlide()" aria-label="Previous slide">&#8249;</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="pixel-btn carousel-btn" onclick="nextSlide()" aria-label="Next slide">&#8250;</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <article class="pixel-card">
+        <div class="contact-layout">
+          <div class="contact-info">
+            <h2>Contact Me</h2>
+            <p>
+              If you are interested in professional collaboration or would like to enquire about the services I can provide,
+              please don't hesitate to reach out.
+            </p>
+            <ul>
+              <li>
+                Email: <a href="mailto:caleb11.steenkamp@gmail.com">caleb11.steenkamp@gmail.com</a>
+              </li>
+              <li>
+                Phone: <a href="tel:0644036560">064 403 6560</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact-action">
+            <button id="contact-btn" class="pixel-btn" onclick="toggleContactForm()">Contact Me</button>
+            <div id="contact-form-wrapper" class="contact-form-wrapper">
+              <button class="close-btn" onclick="closeContactForm()">&times;</button>
+              <form action="https://formspree.io/f/xojbbyaw" method="POST" class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit" class="pixel-btn">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> <a href="https://github.com/xalebxen99" target="_blank" rel="noopener noreferrer">Caleb Steenkamp</a>'s Portfolio &middot; All rights reserved</p>
+  </footer>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="js/main.js?v=4"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
