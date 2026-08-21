@@ -375,6 +375,18 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   font-size: 10px;
 }
 
+.slide-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.slide-profile-text {
+  font-size: 14px !important;
+  margin-top: 2rem !important;
+  padding: 2rem;
+}
+
 /* Carousel controls */
 .carousel-controls {
   display: flex;

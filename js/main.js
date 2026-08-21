@@ -152,12 +152,6 @@ function initContactForm() {
 // ===== Projects Carousel =====
 const projects = [
   {
-    title: 'GitHub',
-    description: 'My projects are hosted on GitHub.',
-    iframe: 'https://github.com/XalebXEn99',
-    type: 'iframe'
-  },
-  {
     title: 'Xencode Internship',
     description: '*Very minor contributions during my internship at Xencode.',
     iframe: 'https://www.xencode.co.za/home',
@@ -174,6 +168,7 @@ const projects = [
     media: 'assets/snake.mp4',
     link: 'https://snake.wits.ai/',
     linkLabel: 'Competition Website',
+    github: 'https://github.com/XalebXEn99/MY-SNAKE-BOY',
     type: 'video'
   },
   {
@@ -184,6 +179,11 @@ const projects = [
       { label: 'Xenzen2D (Top-down game)', url: 'https://github.com/xenzenok/xenzen2D', mp4: 'assets/xenzen2d.mp4' },
       { label: 'Xenzen SideScroller', url: 'https://github.com/xenzensidescroller', gif: 'assets/Spectrum.gif' }
     ]
+  },
+  {
+    title: 'My Profile',
+    description: "You're already here silly ^-^",
+    type: 'profile'
   }
 ];
 
@@ -213,7 +213,10 @@ function buildCarousel() {
         <video src="${project.media}" autoplay loop muted playsinline></video>
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
-        ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="slide-link">${project.linkLabel || 'View on GitHub'}</a>` : ''}
+        <div class="slide-links">
+          ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="slide-link">${project.linkLabel || 'View on GitHub'}</a>` : ''}
+          ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a>` : ''}
+        </div>
       `;
     } else if (project.type === 'godot') {
       let gridHTML = '<div class="godot-grid">';
@@ -231,6 +234,11 @@ function buildCarousel() {
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
         ${gridHTML}
+      `;
+    } else if (project.type === 'profile') {
+      slide.innerHTML = `
+        <h2 class="slide-title">${project.title}</h2>
+        <p class="slide-desc slide-profile-text">${project.description}</p>
       `;
     }
 
