@@ -155,12 +155,14 @@ const projects = [
     title: 'Xencode Internship',
     description: '*Very minor contributions during my internship at Xencode.',
     iframe: 'https://www.xencode.co.za/home',
+    liveLink: 'https://www.xencode.co.za/home',
     type: 'iframe'
   },
   {
     title: 'Municipal Reporting Portal',
     description: 'One of three major group projects in 2026. A web-based platform for municipal service reporting.',
     iframe: 'https://municipal-reporting-portal-aja5cscdapgregar.brazilsouth-01.azurewebsites.net/',
+    liveLink: 'https://municipal-reporting-portal-aja5cscdapgregar.brazilsouth-01.azurewebsites.net/',
     github: 'https://github.com/sudoers1/municipal-reporting-portal',
     type: 'iframe'
   },
@@ -186,6 +188,7 @@ const projects = [
     title: 'Turing Machine Simulator',
     description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory. Currently hosted privately on the Wits Gitea server.',
     iframe: 'https://fla-three.vercel.app/',
+    liveLink: 'https://fla-three.vercel.app/',
     type: 'iframe'
   },
   {
@@ -215,7 +218,10 @@ function buildCarousel() {
         <iframe src="${project.iframe}" title="${project.title} Preview" style="scrollbar-width:none;"></iframe>
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
-        ${project.github ? `<div class="slide-links"><a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a></div>` : ''}
+        <div class="slide-links">
+          ${project.liveLink ? `<a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="slide-link">Visit Live Site</a>` : ''}
+          ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a>` : ''}
+        </div>
       `;
     } else if (project.type === 'video') {
       slide.innerHTML = `
@@ -265,25 +271,49 @@ function buildCarousel() {
 
   goToSlide(0);
   startAutoplay();
+
+  // Clone first slide for infinite loop
+  const firstSlide = track.querySelector('.carousel-slide');
+  if (firstSlide) {
+    const clone = firstSlide.cloneNode(true);
+    track.appendChild(clone);
+  }
 }
 
 function goToSlide(index) {
   const track = document.getElementById('carousel-track');
   if (!track) return;
   currentSlide = index;
+  track.style.transition = 'transform 0.4s ease';
   track.style.transform = `translateX(-${index * 100}%)`;
 
+  // Update dots (only for real slides, not the clone)
+  const dotIndex = index >= projects.length ? 0 : index;
   document.querySelectorAll('#carousel-dots .carousel-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
+    dot.classList.toggle('active', i === dotIndex);
   });
+
+  // If we're on the clone, instantly jump back to real first slide after transition
+  if (index === projects.length) {
+    setTimeout(() => {
+      track.style.transition = 'none';
+      currentSlide = 0;
+      track.style.transform = `translateX(0)`;
+    }, 400);
+  }
 }
 
 function nextSlide() {
-  goToSlide((currentSlide + 1) % projects.length);
+  goToSlide(currentSlide + 1);
 }
 
 function prevSlide() {
-  goToSlide((currentSlide - 1 + projects.length) % projects.length);
+  if (currentSlide === 0) {
+    // Wrap to last slide
+    goToSlide(projects.length - 1);
+  } else {
+    goToSlide(currentSlide - 1);
+  }
 }
 
 function startAutoplay() {

@@ -727,6 +727,10 @@ a:hover { opacity: 0.8; text-decoration: underline; }
     grid-template-columns: 1fr;
   }
 
+  .about-carousel .carousel-slide {
+    padding-top: 3rem;
+  }
+
   .carousel-slide iframe,
   .carousel-slide video,
   .carousel-slide img {
