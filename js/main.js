@@ -269,15 +269,24 @@ function buildCarousel() {
     dotsContainer.appendChild(dot);
   });
 
-  goToSlide(0);
-  startAutoplay();
-
-  // Clone first slide for infinite loop
+  // Clone first slide and append for infinite loop forward
   const firstSlide = track.querySelector('.carousel-slide');
   if (firstSlide) {
     const clone = firstSlide.cloneNode(true);
     track.appendChild(clone);
   }
+
+  // Clone last slide and prepend for infinite loop backward
+  const lastSlide = track.querySelectorAll('.carousel-slide')[projects.length - 1];
+  if (lastSlide) {
+    const clone = lastSlide.cloneNode(true);
+    track.insertBefore(clone, track.firstChild);
+  }
+
+  // Set initial position (first real slide is at index 1 due to prepended clone)
+  currentSlide = 0;
+  track.style.transform = `translateX(-100%)`;
+  startAutoplay();
 }
 
 function goToSlide(index) {
@@ -285,20 +294,30 @@ function goToSlide(index) {
   if (!track) return;
   currentSlide = index;
   track.style.transition = 'transform 0.4s ease';
-  track.style.transform = `translateX(-${index * 100}%)`;
+  // Add 1 to account for prepended clone
+  track.style.transform = `translateX(-${(index + 1) * 100}%)`;
 
-  // Update dots (only for real slides, not the clone)
-  const dotIndex = index >= projects.length ? 0 : index;
+  // Update dots (only for real slides, not the clones)
+  const dotIndex = index >= projects.length ? 0 : (index < 0 ? projects.length - 1 : index);
   document.querySelectorAll('#carousel-dots .carousel-dot').forEach((dot, i) => {
     dot.classList.toggle('active', i === dotIndex);
   });
 
-  // If we're on the clone, instantly jump back to real first slide after transition
+  // If we're on the appended clone (after last), jump back to real first slide
   if (index === projects.length) {
     setTimeout(() => {
       track.style.transition = 'none';
       currentSlide = 0;
-      track.style.transform = `translateX(0)`;
+      track.style.transform = `translateX(-100%)`;
+    }, 400);
+  }
+
+  // If we're on the prepended clone (before first), jump to real last slide
+  if (index === -1) {
+    setTimeout(() => {
+      track.style.transition = 'none';
+      currentSlide = projects.length - 1;
+      track.style.transform = `translateX(-${projects.length * 100}%)`;
     }, 400);
   }
 }
@@ -308,12 +327,7 @@ function nextSlide() {
 }
 
 function prevSlide() {
-  if (currentSlide === 0) {
-    // Wrap to last slide
-    goToSlide(projects.length - 1);
-  } else {
-    goToSlide(currentSlide - 1);
-  }
+  goToSlide(currentSlide - 1);
 }
 
 function startAutoplay() {
