@@ -235,6 +235,7 @@ function buildCarousel() {
             <p>${item.label}</p>
             ${item.gif ? `<img src="${item.gif}" alt="${item.label}">` : ''}
             ${item.mp4 ? `<video src="${item.mp4}" autoplay loop muted playsinline></video>` : ''}
+            <span class="godot-hint">Click to view on GitHub</span>
           </div>
         `;
       });
