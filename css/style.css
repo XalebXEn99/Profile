@@ -318,6 +318,7 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   position: relative;
   overflow: hidden;
   border: 2px solid var(--card-border);
+  transition: height 0.4s ease;
 }
 
 .carousel-track {

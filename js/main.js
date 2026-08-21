@@ -286,7 +286,24 @@ function buildCarousel() {
   // Set initial position (first real slide is at index 1 due to prepended clone)
   currentSlide = 0;
   track.style.transform = `translateX(-100%)`;
+  updateCarouselHeight();
   startAutoplay();
+}
+
+function updateCarouselHeight() {
+  const track = document.getElementById('carousel-track');
+  const wrapper = track?.parentElement;
+  if (!track || !wrapper) return;
+  
+  // Get the actual slide index (accounting for prepended clone)
+  const realIndex = currentSlide < 0 ? projects.length - 1 : (currentSlide >= projects.length ? 0 : currentSlide);
+  const slides = track.querySelectorAll('.carousel-slide');
+  // +1 because of prepended clone
+  const slideElement = slides[realIndex + 1];
+  
+  if (slideElement) {
+    wrapper.style.height = slideElement.offsetHeight + 'px';
+  }
 }
 
 function goToSlide(index) {
@@ -303,12 +320,16 @@ function goToSlide(index) {
     dot.classList.toggle('active', i === dotIndex);
   });
 
+  // Update carousel height to match current slide
+  updateCarouselHeight();
+
   // If we're on the appended clone (after last), jump back to real first slide
   if (index === projects.length) {
     setTimeout(() => {
       track.style.transition = 'none';
       currentSlide = 0;
       track.style.transform = `translateX(-100%)`;
+      updateCarouselHeight();
     }, 400);
   }
 
@@ -318,6 +339,7 @@ function goToSlide(index) {
       track.style.transition = 'none';
       currentSlide = projects.length - 1;
       track.style.transform = `translateX(-${projects.length * 100}%)`;
+      updateCarouselHeight();
     }, 400);
   }
 }
@@ -515,4 +537,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (projectsWrapper) {
     addSwipeSupport(projectsWrapper, nextSlide, prevSlide);
   }
+
+  // Update carousel height on resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(updateCarouselHeight, 100);
+  });
 });
