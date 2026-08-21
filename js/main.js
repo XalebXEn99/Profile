@@ -184,7 +184,7 @@ const projects = [
   },
   {
     title: 'Turing Machine Simulator',
-    description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory.',
+    description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory. Currently hosted privately on the Wits Gitea server.',
     iframe: 'https://fla-three.vercel.app/',
     type: 'iframe'
   },
