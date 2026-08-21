@@ -159,7 +159,9 @@ const projects = [
   },
   {
     title: 'Municipal Reporting Portal',
+    description: 'One of three major group projects in 2026. A web-based platform for municipal service reporting.',
     iframe: 'https://municipal-reporting-portal-aja5cscdapgregar.brazilsouth-01.azurewebsites.net/',
+    github: 'https://github.com/sudoers1/municipal-reporting-portal',
     type: 'iframe'
   },
   {
@@ -177,7 +179,7 @@ const projects = [
     type: 'godot',
     listLinks: [
       { label: 'Xenzen2D (Top-down game)', url: 'https://github.com/xenzenok/xenzen2D', mp4: 'assets/xenzen2d.mp4' },
-      { label: 'Xenzen SideScroller', url: 'https://github.com/xenzensidescroller', gif: 'assets/Spectrum.gif' }
+      { label: 'Xenzen SideScroller', url: 'https://github.com/xenzenok/xenzensidescroller', gif: 'assets/Spectrum.gif' }
     ]
   },
   {
@@ -187,8 +189,8 @@ const projects = [
     type: 'iframe'
   },
   {
-    title: 'My Profile',
-    description: "404 NOT FOUND : You're already here silly ^-^",
+    title: '404',
+    description: "NOT FOUND\n\nThe resource you are looking for is already being viewed.\n\nError code: PROFILE_ALREADY_OPEN\n\nYou're already here silly ^-^",
     type: 'profile'
   }
 ];
@@ -213,6 +215,7 @@ function buildCarousel() {
         <iframe src="${project.iframe}" title="${project.title} Preview" style="scrollbar-width:none;"></iframe>
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
+        ${project.github ? `<div class="slide-links"><a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a></div>` : ''}
       `;
     } else if (project.type === 'video') {
       slide.innerHTML = `
@@ -243,8 +246,10 @@ function buildCarousel() {
       `;
     } else if (project.type === 'profile') {
       slide.innerHTML = `
-        <h2 class="slide-title">${project.title}</h2>
-        <p class="slide-desc slide-profile-text">${project.description}</p>
+        <div class="slide-error-box">
+          <h2 class="slide-error-title">${project.title}</h2>
+          <p class="slide-error-text">${project.description.replace(/\n/g, '<br>')}</p>
+        </div>
       `;
     }
 
