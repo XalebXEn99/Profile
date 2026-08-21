@@ -163,8 +163,8 @@ const projects = [
     type: 'iframe'
   },
   {
-    title: 'A* Pathfinding Snake Game (2024 Competition)',
-    description: 'My personal implementation for the 2024 Wits A* Snake Competition.',
+    title: 'Pathfinding Snake Game (2024 Competition)',
+    description: 'My personal implementation for the 2024 Wits Snake Competition.',
     media: 'assets/snake.mp4',
     link: 'https://snake.wits.ai/',
     linkLabel: 'Competition Website',
@@ -181,8 +181,14 @@ const projects = [
     ]
   },
   {
+    title: 'Turing Machine Simulator',
+    description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory.',
+    iframe: 'https://fla-three.vercel.app/',
+    type: 'iframe'
+  },
+  {
     title: 'My Profile',
-    description: "You're already here silly ^-^",
+    description: "404 NOT FOUND : You're already here silly ^-^",
     type: 'profile'
   }
 ];
@@ -350,7 +356,7 @@ function buildChart() {
     'Xencode Internship',
     'Began Personal Development Projects',
     'Tutor Doctor Employment',
-    '2 Major Group Projects + Game Development'
+    '3 Major Group Projects + Game Development'
   ];
 
   const config = {
