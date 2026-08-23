@@ -317,6 +317,16 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   font-family: var(--font-pixel);
   font-size: 10px;
   color: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+#contact-btn {
+  animation: pulse 2s ease-in-out infinite;
 }
 
 /* ===== About Carousel ===== */
