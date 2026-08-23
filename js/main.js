@@ -166,6 +166,13 @@ const projects = [
     github: 'https://github.com/sudoers1/municipal-reporting-portal',
     type: 'iframe'
   },
+   {
+    title: 'Turing Machine Simulator',
+    description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory. Currently hosted privately on the Wits Gitea server.',
+    iframe: 'https://fla-three.vercel.app/',
+    liveLink: 'https://fla-three.vercel.app/',
+    type: 'iframe'
+  },
   {
     title: 'Pathfinding Snake Game (2024 Competition)',
     description: 'My personal implementation for the 2024 Wits Snake Competition.',
@@ -175,6 +182,12 @@ const projects = [
     github: 'https://github.com/XalebXEn99/MY-SNAKE-BOY',
     type: 'video'
   },
+
+  {
+    title: '404',
+    description: "NOT FOUND\n\nThe resource you are looking for is already being viewed.\n\nError code: PROFILE_ALREADY_OPEN\n\nYou're already here silly ^-^",
+    type: 'profile'
+  },
   {
     title: 'Godot Games',
     description: 'Actively developing 2D games in Godot.',
@@ -183,18 +196,6 @@ const projects = [
       { label: 'Xenzen2D (Top-down game)', url: 'https://github.com/xenzenok/xenzen2D', mp4: 'assets/xenzen2d.mp4' },
       { label: 'Xenzen SideScroller', url: 'https://github.com/xenzenok/xenzensidescroller', gif: 'assets/Spectrum.gif' }
     ]
-  },
-  {
-    title: 'Turing Machine Simulator',
-    description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory. Currently hosted privately on the Wits Gitea server.',
-    iframe: 'https://fla-three.vercel.app/',
-    liveLink: 'https://fla-three.vercel.app/',
-    type: 'iframe'
-  },
-  {
-    title: '404',
-    description: "NOT FOUND\n\nThe resource you are looking for is already being viewed.\n\nError code: PROFILE_ALREADY_OPEN\n\nYou're already here silly ^-^",
-    type: 'profile'
   }
 ];
 
