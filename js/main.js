@@ -189,6 +189,22 @@ const projects = [
     type: 'profile'
   },
   {
+    title: '3ditor JS',
+    description: 'A browser-based Three.js scene and cutscene creator. Build scenes visually, export as ready-to-use modules.',
+    iframe: 'https://xalebxen99.github.io/3ditorJS/',
+    liveLink: 'https://xalebxen99.github.io/3ditorJS/',
+    github: 'https://github.com/XalebXEn99/3ditorJS',
+    type: 'iframe'
+  },
+  {
+    title: 'Math Arena',
+    description: 'A web-based math practice tool for tutoring fundamentals. Quizzes, fractions, Grade 8 curriculum, and reports.',
+    iframe: 'https://xalebxen99.github.io/Math-Arena/',
+    liveLink: 'https://xalebxen99.github.io/Math-Arena/',
+    github: 'https://github.com/XalebXEn99/Math-Arena',
+    type: 'iframe'
+  },
+  {
     title: 'Godot Games',
     description: 'Actively developing 2D games in Godot.',
     type: 'godot',
