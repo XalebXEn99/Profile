@@ -394,6 +394,18 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   background: var(--input-bg);
 }
 
+.carousel-slide iframe.iframe-fullscreen {
+  height: 80vh;
+  border: none;
+}
+
+.slide-link-gif {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border: 2px solid var(--card-border);
+}
+
 .carousel-slide video,
 .carousel-slide img {
   width: 100%;

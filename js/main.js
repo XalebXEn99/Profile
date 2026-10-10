@@ -169,8 +169,8 @@ const projects = [
    {
     title: 'Turing Machine Simulator',
     description: 'One of three major group projects in 2026. A Turing machine simulator for formal languages and automata theory. Currently hosted privately on the Wits Gitea server.',
-    iframe: 'https://fla-three.vercel.app/',
-    liveLink: 'https://fla-three.vercel.app/',
+    iframe: 'https://fla.capitalsigma.biz/',
+    liveLink: 'https://fla.capitalsigma.biz/',
     type: 'iframe'
   },
   {
@@ -188,13 +188,22 @@ const projects = [
     description: "NOT FOUND\n\nThe resource you are looking for is already being viewed.\n\nError code: PROFILE_ALREADY_OPEN\n\nYou're already here silly ^-^",
     type: 'profile'
   },
+
   {
-    title: '3ditor JS',
-    description: 'A browser-based Three.js scene and cutscene creator. Build scenes visually, export as ready-to-use modules.',
-    iframe: 'https://xalebxen99.github.io/3ditorJS/',
-    liveLink: 'https://xalebxen99.github.io/3ditorJS/',
-    github: 'https://github.com/XalebXEn99/3ditorJS',
-    type: 'iframe'
+    title: "Brondon's Revenge (CGV Game)",
+    description: 'A 3D game built with Three.js.',
+    iframe: 'https://brondons-revenge.2548966.workers.dev/',
+    liveLink: 'https://brondons-revenge.2548966.workers.dev/',
+    github: 'https://github.com/drawCurve-C-H-A-S-S/Brondons_Revenge',
+    type: 'iframe',
+    fullscreen: true
+  },
+  {
+    title: 'MD-Reader',
+    gif: 'assets/MD-Reader.gif',
+    link: 'https://xalebxen99.github.io/MD-Reader/',
+    github: 'https://github.com/XalebXEn99/MD-Reader',
+    type: 'link'
   },
   {
     title: 'Math Arena',
@@ -231,12 +240,21 @@ function buildCarousel() {
     slide.className = 'carousel-slide';
 
     if (project.type === 'iframe') {
+      const iframeClass = project.fullscreen ? 'iframe-fullscreen' : '';
       slide.innerHTML = `
-        <iframe src="${project.iframe}" title="${project.title} Preview" style="scrollbar-width:none;"></iframe>
+        <iframe src="${project.iframe}" title="${project.title} Preview" class="${iframeClass}" style="scrollbar-width:none;"></iframe>
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
         <div class="slide-links">
           ${project.liveLink ? `<a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="slide-link">Visit Live Site</a>` : ''}
+          ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a>` : ''}
+        </div>
+      `;
+    } else if (project.type === 'link') {
+      slide.innerHTML = `
+        ${project.gif ? `<img src="${project.gif}" alt="${project.title} preview" class="slide-link-gif">` : ''}
+        <div class="slide-links">
+          ${project.link ? `<a href="${project.link}" class="slide-link">Open Project</a>` : ''}
           ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a>` : ''}
         </div>
       `;
