@@ -200,10 +200,11 @@ const projects = [
   },
   {
     title: 'MD-Reader',
-    gif: 'assets/MD-Reader.gif',
-    link: 'https://xalebxen99.github.io/MD-Reader/',
+    description: 'A markdown reader and viewer.',
+    iframe: 'https://xalebxen99.github.io/MD-Reader/',
+    liveLink: 'https://xalebxen99.github.io/MD-Reader/',
     github: 'https://github.com/XalebXEn99/MD-Reader',
-    type: 'link'
+    type: 'iframe'
   },
   {
     title: 'Math Arena',
