@@ -14,7 +14,7 @@ Hidden videos are paused, and the carousel does not autoplay off screen or in a
 background tab. Chart.js loads only when the My Progress slide is opened. The
 pixel font loads without blocking the initial render.
 
-Brondon's Revenge shows a local title-screen screenshot until the visitor clicks
+Brondon's Revenge shows a local game screenshot until the visitor clicks
 or keyboard-activates **Click to play**. Neither scrolling nor carousel autoplay
 loads the game. Starting the game pauses carousel autoplay so it does not interrupt
 play. Its Wits-hosted iframe URL includes `?muted=1` to start background music and

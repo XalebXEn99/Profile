@@ -231,9 +231,14 @@ let currentSlide = 0;
 let autoplayTimer;
 let projectsVisible = false;
 
+function getActiveProjectSlide() {
+  const index = (currentSlide + projects.length) % projects.length;
+  return document.querySelectorAll('#carousel-track .carousel-slide')[index + 1];
+}
+
 function updateProjectMedia() {
   const slides = document.querySelectorAll('#carousel-track .carousel-slide');
-  const activeSlide = slides[currentSlide + 1];
+  const activeSlide = getActiveProjectSlide();
 
   slides.forEach(slide => {
     const active = projectsVisible && !document.hidden && slide === activeSlide;
@@ -402,11 +407,7 @@ function updateCarouselHeight() {
   const wrapper = track?.parentElement;
   if (!track || !wrapper) return;
   
-  // Get the actual slide index (accounting for prepended clone)
-  const realIndex = currentSlide < 0 ? projects.length - 1 : (currentSlide >= projects.length ? 0 : currentSlide);
-  const slides = track.querySelectorAll('.carousel-slide');
-  // +1 because of prepended clone
-  const slideElement = slides[realIndex + 1];
+  const slideElement = getActiveProjectSlide();
   
   if (slideElement) {
     wrapper.style.height = slideElement.offsetHeight + 'px';
@@ -464,7 +465,7 @@ function prevSlide() {
 
 function startAutoplay() {
   clearInterval(autoplayTimer);
-  const activeSlide = document.querySelectorAll('#carousel-track .carousel-slide')[currentSlide + 1];
+  const activeSlide = getActiveProjectSlide();
   if (!projectsVisible || document.hidden || activeSlide?.querySelector('.project-preview iframe')) return;
   autoplayTimer = setInterval(nextSlide, 6000);
 }
