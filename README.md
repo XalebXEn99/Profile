@@ -14,6 +14,10 @@ Hidden videos are paused, and the carousel does not autoplay off screen or in a
 background tab. Chart.js loads only when the My Progress slide is opened. The
 pixel font loads without blocking the initial render.
 
+Project iframes, including the click-to-load game, suppress their document
+scrollbars with `scrolling="no"`. Parent-page CSS cannot hide scrollbars inside
+cross-origin documents; any custom inner scroll panels belong to the embedded site.
+
 Brondon's Revenge shows a local game screenshot until the visitor clicks
 or keyboard-activates **Click to play**. Neither scrolling nor carousel autoplay
 loads the game. Starting the game pauses carousel autoplay so it does not interrupt

@@ -273,6 +273,7 @@ function loadGame(button) {
   stopAutoplay();
   const iframe = document.createElement('iframe');
   iframe.title = preview.dataset.title;
+  iframe.setAttribute('scrolling', 'no');
   iframe.src = preview.dataset.gameSrc;
   iframe.allowFullscreen = true;
   preview.replaceChildren(iframe);
@@ -300,7 +301,7 @@ function buildCarousel() {
             <span class="embed-prompt">Click to play</span>
           </button>
         </div>
-      ` : `<iframe data-src="${project.iframe}" loading="lazy" title="${project.title} Preview" class="${iframeClass}" style="scrollbar-width:none;"></iframe>`;
+      ` : `<iframe data-src="${project.iframe}" loading="lazy" scrolling="no" title="${project.title} Preview" class="${iframeClass}"></iframe>`;
       slide.innerHTML = `
         ${preview}
         <h2 class="slide-title">${project.title}</h2>
