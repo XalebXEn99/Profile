@@ -192,18 +192,20 @@ const projects = [
   {
     title: "Brondon's Revenge (CGV Game)",
     description: 'A 3D game built with Three.js.',
-    iframe: 'https://brondons-revenge.2548966.workers.dev/',
-    liveLink: 'https://brondons-revenge.2548966.workers.dev/',
+    iframe: 'https://lamp.ms.wits.ac.za/students/sgroup3928/brondons-revenge/?muted=1',
+    liveLink: 'https://lamp.ms.wits.ac.za/students/sgroup3928/brondons-revenge/',
     github: 'https://github.com/drawCurve-C-H-A-S-S/Brondons_Revenge',
     type: 'iframe',
-    fullscreen: true
+    fullscreen: true,
+    clickToLoad: true,
+    poster: 'assets/brondons-revenge-preview.jpg'
   },
   {
-    title: 'MD-Reader',
+    title: 'Study Room',
     description: 'A markdown reader and viewer.',
-    iframe: 'https://xalebxen99.github.io/MD-Reader/',
-    liveLink: 'https://xalebxen99.github.io/MD-Reader/',
-    github: 'https://github.com/XalebXEn99/MD-Reader',
+    iframe: 'https://study.thestone.co.za/',
+    liveLink: 'https://study.thestone.co.za/',
+    github: 'https://github.com/XalebXEn99/study_room',
     type: 'iframe'
   },
   {
@@ -227,6 +229,50 @@ const projects = [
 
 let currentSlide = 0;
 let autoplayTimer;
+let projectsVisible = false;
+
+function updateProjectMedia() {
+  const slides = document.querySelectorAll('#carousel-track .carousel-slide');
+  const activeSlide = slides[currentSlide + 1];
+
+  slides.forEach(slide => {
+    const active = projectsVisible && !document.hidden && slide === activeSlide;
+
+    if (active) {
+      slide.querySelectorAll('[data-src]').forEach(media => {
+        media.src = media.dataset.src;
+        media.removeAttribute('data-src');
+      });
+    }
+
+    slide.querySelectorAll('video').forEach(video => {
+      if (active) {
+        if (video.paused) {
+          video.play().catch(error => {
+            if (error.name !== 'AbortError') {
+              console.warn('Project preview could not autoplay:', error);
+            }
+          });
+        }
+      } else {
+        video.pause();
+      }
+    });
+  });
+}
+
+function loadGame(button) {
+  const preview = button.closest('.project-preview');
+  if (!preview) return;
+
+  stopAutoplay();
+  const iframe = document.createElement('iframe');
+  iframe.title = preview.dataset.title;
+  iframe.src = preview.dataset.gameSrc;
+  iframe.allowFullscreen = true;
+  preview.replaceChildren(iframe);
+  iframe.focus();
+}
 
 function buildCarousel() {
   const track = document.getElementById('carousel-track');
@@ -242,8 +288,16 @@ function buildCarousel() {
 
     if (project.type === 'iframe') {
       const iframeClass = project.fullscreen ? 'iframe-fullscreen' : '';
+      const preview = project.clickToLoad ? `
+        <div class="project-preview ${iframeClass}" data-game-src="${project.iframe}" data-title="${project.title} Preview">
+          <button type="button" class="embed-trigger" aria-label="Play ${project.title}">
+            <img data-src="${project.poster}" alt="" loading="lazy" decoding="async">
+            <span class="embed-prompt">Click to play</span>
+          </button>
+        </div>
+      ` : `<iframe data-src="${project.iframe}" loading="lazy" title="${project.title} Preview" class="${iframeClass}" style="scrollbar-width:none;"></iframe>`;
       slide.innerHTML = `
-        <iframe src="${project.iframe}" title="${project.title} Preview" class="${iframeClass}" style="scrollbar-width:none;"></iframe>
+        ${preview}
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
         <div class="slide-links">
@@ -253,7 +307,7 @@ function buildCarousel() {
       `;
     } else if (project.type === 'link') {
       slide.innerHTML = `
-        ${project.gif ? `<img src="${project.gif}" alt="${project.title} preview" class="slide-link-gif">` : ''}
+        ${project.gif ? `<img data-src="${project.gif}" alt="${project.title} preview" class="slide-link-gif" loading="lazy" decoding="async">` : ''}
         <div class="slide-links">
           ${project.link ? `<a href="${project.link}" class="slide-link">Open Project</a>` : ''}
           ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a>` : ''}
@@ -261,7 +315,7 @@ function buildCarousel() {
       `;
     } else if (project.type === 'video') {
       slide.innerHTML = `
-        <video src="${project.media}" autoplay loop muted playsinline></video>
+        <video data-src="${project.media}" preload="none" loop muted playsinline></video>
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
         <div class="slide-links">
@@ -275,8 +329,8 @@ function buildCarousel() {
         gridHTML += `
           <div class="godot-item" onclick="window.open('${item.url}', '_blank')">
             <p>${item.label}</p>
-            ${item.gif ? `<img src="${item.gif}" alt="${item.label}">` : ''}
-            ${item.mp4 ? `<video src="${item.mp4}" autoplay loop muted playsinline></video>` : ''}
+            ${item.gif ? `<img data-src="${item.gif}" alt="${item.label}" loading="lazy" decoding="async">` : ''}
+            ${item.mp4 ? `<video data-src="${item.mp4}" preload="none" loop muted playsinline></video>` : ''}
             <span class="godot-hint">Click to view on GitHub</span>
           </div>
         `;
@@ -323,7 +377,24 @@ function buildCarousel() {
   currentSlide = 0;
   track.style.transform = `translateX(-100%)`;
   updateCarouselHeight();
-  startAutoplay();
+  track.addEventListener('click', event => {
+    const button = event.target.closest('.embed-trigger');
+    if (button) loadGame(button);
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    projectsVisible = entries[0].isIntersecting;
+    updateProjectMedia();
+    if (projectsVisible) startAutoplay();
+    else stopAutoplay();
+  });
+  observer.observe(track.parentElement);
+
+  document.addEventListener('visibilitychange', () => {
+    updateProjectMedia();
+    if (document.hidden) stopAutoplay();
+    else startAutoplay();
+  });
 }
 
 function updateCarouselHeight() {
@@ -358,6 +429,7 @@ function goToSlide(index) {
 
   // Update carousel height to match current slide
   updateCarouselHeight();
+  updateProjectMedia();
 
   // If we're on the appended clone (after last), jump back to real first slide
   if (index === projects.length) {
@@ -366,6 +438,7 @@ function goToSlide(index) {
       currentSlide = 0;
       track.style.transform = `translateX(-100%)`;
       updateCarouselHeight();
+      updateProjectMedia();
     }, 400);
   }
 
@@ -376,6 +449,7 @@ function goToSlide(index) {
       currentSlide = projects.length - 1;
       track.style.transform = `translateX(-${projects.length * 100}%)`;
       updateCarouselHeight();
+      updateProjectMedia();
     }, 400);
   }
 }
@@ -390,6 +464,8 @@ function prevSlide() {
 
 function startAutoplay() {
   clearInterval(autoplayTimer);
+  const activeSlide = document.querySelectorAll('#carousel-track .carousel-slide')[currentSlide + 1];
+  if (!projectsVisible || document.hidden || activeSlide?.querySelector('.project-preview iframe')) return;
   autoplayTimer = setInterval(nextSlide, 6000);
 }
 
@@ -423,6 +499,7 @@ function goToAboutSlide(index) {
   document.querySelectorAll('#about-dots .carousel-dot').forEach((dot, i) => {
     dot.classList.toggle('active', i === index);
   });
+  if (index === 1) loadChart();
 }
 
 function nextAboutSlide() {
@@ -434,6 +511,36 @@ function prevAboutSlide() {
 }
 
 // ===== Progress Chart =====
+let chartLoading = false;
+
+function loadChart() {
+  if (chartInstance || chartLoading) return;
+  if (typeof Chart === 'function') {
+    buildChart();
+    return;
+  }
+
+  chartLoading = true;
+  const status = document.getElementById('progress-chart-status');
+  status.hidden = false;
+  status.textContent = 'Loading progress chart...';
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js';
+  script.async = true;
+  script.onload = () => {
+    chartLoading = false;
+    status.hidden = true;
+    buildChart();
+  };
+  script.onerror = () => {
+    chartLoading = false;
+    script.remove();
+    status.textContent = 'Unable to load the chart. Select this slide again to retry.';
+    console.error('Failed to load Chart.js:', script.src);
+  };
+  document.head.appendChild(script);
+}
+
 function buildChart() {
   const ctx = document.getElementById('progress-chart');
   if (!ctx) return;
@@ -560,7 +667,6 @@ function addSwipeSupport(element, onSwipeLeft, onSwipeRight) {
 document.addEventListener('DOMContentLoaded', () => {
   initAboutCarousel();
   buildCarousel();
-  buildChart();
   initContactForm();
 
   // Add swipe to carousels
@@ -580,4 +686,5 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(updateCarouselHeight, 100);
   });
+  document.fonts.ready.then(updateCarouselHeight);
 });

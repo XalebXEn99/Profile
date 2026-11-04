@@ -387,16 +387,68 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   padding: 1rem;
 }
 
-.carousel-slide iframe {
+.carousel-slide iframe,
+.project-preview {
   width: 100%;
   height: 500px;
   border: 2px solid var(--card-border);
   background: var(--input-bg);
 }
 
-.carousel-slide iframe.iframe-fullscreen {
+.carousel-slide iframe.iframe-fullscreen,
+.project-preview.iframe-fullscreen {
   height: 80vh;
   border: none;
+}
+
+.project-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-preview iframe {
+  height: 100%;
+  border: none;
+}
+
+.embed-trigger {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  border: none;
+  padding: 0;
+  background: var(--input-bg);
+  cursor: pointer;
+  font-family: var(--font-pixel);
+}
+
+.carousel-slide .embed-trigger img {
+  height: 100%;
+  border: none;
+  image-rendering: auto;
+}
+
+.embed-prompt {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 1.5rem;
+  border: var(--pixel-border) solid var(--card-border);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.embed-trigger:hover .embed-prompt {
+  background: var(--btn-hover);
+}
+
+.embed-trigger:focus-visible {
+  outline: var(--pixel-border) solid var(--accent);
+  outline-offset: calc(-1 * var(--pixel-border));
 }
 
 .slide-link-gif {
@@ -771,6 +823,41 @@ a:hover { opacity: 0.8; text-decoration: underline; }
 }
 
 /* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .about-content {
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-left {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .about-right {
+    order: -1;
+    width: 100%;
+    justify-content: center;
+    padding-top: 0;
+  }
+
+  .headshot-frame {
+    width: min(240px, calc(100% - 8px));
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .about-right .headshot-img {
+    height: 100%;
+    border: none;
+  }
+
+  .about-text {
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .section { padding: 2rem 1rem; }
   .pixel-card { padding: 1.5rem; }
@@ -798,9 +885,14 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   }
 
   .carousel-slide iframe,
+  .project-preview,
   .carousel-slide video,
   .carousel-slide img {
     height: 300px;
+  }
+
+  .project-preview iframe {
+    height: 100%;
   }
 
   .navbar-inner { gap: 1rem; }

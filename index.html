@@ -8,8 +8,9 @@
   <link rel="icon" href="assets/favicon.ico" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
   <!-- Navbar -->
@@ -73,6 +74,7 @@
               <div class="progress-content">
                 <div class="progress-chart-container">
                   <canvas id="progress-chart"></canvas>
+                  <p id="progress-chart-status" role="status" hidden></p>
                 </div>
                 <div class="progress-highlights">
                   <div class="highlight-item">
@@ -161,9 +163,7 @@
     <p>&copy; <span id="year"></span> <a href="https://github.com/xalebxen99" target="_blank" rel="noopener noreferrer">Caleb Steenkamp</a>'s Portfolio &middot; All rights reserved</p>
   </footer>
 
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=9" defer></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
