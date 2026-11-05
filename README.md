@@ -33,6 +33,10 @@ lessons and practice in kana, vocabulary, kanji, grammar, listening and handwrit
 RAT opens directly in a new tab because its server disallows iframe embedding.
 Ka uses a lazy-loaded iframe preview.
 
+[Stoepsit Stone](https://stoepsit.thestone.co.za/) is a music artist website
+featuring a searchable discography, Spotify previews and streaming-platform links.
+It also uses a lazy-loaded iframe preview.
+
 Study Room uses `https://study.thestone.co.za/` and its source is
 [study_room](https://github.com/XalebXEn99/study_room). Its iframe requires valid
 HTTPS: after GitHub Pages completes DNS verification and issues the custom-domain

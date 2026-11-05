@@ -231,6 +231,13 @@ const projects = [
     type: 'iframe'
   },
   {
+    title: 'Stoepsit Stone',
+    description: 'A music artist website I built for Stoepsit Stone, featuring a searchable discography, Spotify previews and streaming-platform links.',
+    iframe: 'https://stoepsit.thestone.co.za/',
+    liveLink: 'https://stoepsit.thestone.co.za/',
+    type: 'iframe'
+  },
+  {
     title: 'Godot Games',
     description: 'Actively developing 2D games in Godot.',
     type: 'godot',
