@@ -23,6 +23,15 @@ or keyboard-activates **Click to play**. Neither scrolling nor carousel autoplay
 loads the game. Starting the game pauses carousel autoplay so it does not interrupt
 play. Its Wits-hosted iframe URL includes `?muted=1` to start background music and
 sound effects muted; the standalone game link does not.
+On screens up to 768px wide, its preview and loaded game are 300px tall.
+Larger screens retain the 80vh frame.
+
+[RAT (Repo Analysis Tool)](https://rat.thestone.co.za/) explores repository
+commit history, code churn, file changes and contributor activity.
+[Ka (Japanese Learning)](https://japanese.thestone.co.za/) provides step-by-step
+lessons and practice in kana, vocabulary, kanji, grammar, listening and handwriting.
+RAT opens directly in a new tab because its server disallows iframe embedding.
+Ka uses a lazy-loaded iframe preview.
 
 Study Room uses `https://study.thestone.co.za/` and its source is
 [study_room](https://github.com/XalebXEn99/study_room). Its iframe requires valid

@@ -886,6 +886,7 @@ a:hover { opacity: 0.8; text-decoration: underline; }
 
   .carousel-slide iframe,
   .project-preview,
+  .project-preview.iframe-fullscreen,
   .carousel-slide video,
   .carousel-slide img {
     height: 300px;

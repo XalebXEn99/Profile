@@ -217,6 +217,20 @@ const projects = [
     type: 'iframe'
   },
   {
+    title: 'RAT \u2014 Repo Analysis Tool',
+    description: 'A repository analytics dashboard for exploring commit history, code churn, file changes and contributor activity.',
+    link: 'https://rat.thestone.co.za/',
+    linkLabel: 'Visit Live Site',
+    type: 'link'
+  },
+  {
+    title: '\u5316 (Ka)',
+    description: 'An interactive Japanese learning app with step-by-step lessons, kana, vocabulary, kanji, grammar, listening and handwriting practice.',
+    iframe: 'https://japanese.thestone.co.za/',
+    liveLink: 'https://japanese.thestone.co.za/',
+    type: 'iframe'
+  },
+  {
     title: 'Godot Games',
     description: 'Actively developing 2D games in Godot.',
     type: 'godot',
@@ -314,8 +328,10 @@ function buildCarousel() {
     } else if (project.type === 'link') {
       slide.innerHTML = `
         ${project.gif ? `<img data-src="${project.gif}" alt="${project.title} preview" class="slide-link-gif" loading="lazy" decoding="async">` : ''}
+        <h2 class="slide-title">${project.title}</h2>
+        ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
         <div class="slide-links">
-          ${project.link ? `<a href="${project.link}" class="slide-link">Open Project</a>` : ''}
+          ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener noreferrer" class="slide-link">${project.linkLabel || 'Open Project'}</a>` : ''}
           ${project.github ? `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="slide-link">View on GitHub</a>` : ''}
         </div>
       `;
