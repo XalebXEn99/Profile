@@ -30,12 +30,19 @@ Larger screens retain the 80vh frame.
 commit history, code churn, file changes and contributor activity.
 [Ka (Japanese Learning)](https://japanese.thestone.co.za/) provides step-by-step
 lessons and practice in kana, vocabulary, kanji, grammar, listening and handwriting.
-RAT opens directly in a new tab because its server disallows iframe embedding.
+RAT shows a local dashboard screenshot that opens the live site in a new tab
+because its server disallows iframe embedding.
 Ka uses a lazy-loaded iframe preview.
+
+The 404 profile joke is the final project carousel slide.
 
 [Stoepsit Stone](https://stoepsit.thestone.co.za/) is a music artist website
 featuring a searchable discography, Spotify previews and streaming-platform links.
 It also uses a lazy-loaded iframe preview.
+
+[Landwise](https://farm.thestone.co.za/) brings land, conditions and next steps
+into one farm intelligence workspace. Its lazy-loaded iframe shows the sign-in
+page to signed-out visitors; **Visit Live Site** opens the app in a new tab.
 
 Study Room uses `https://study.thestone.co.za/` and its source is
 [study_room](https://github.com/XalebXEn99/study_room). Its iframe requires valid

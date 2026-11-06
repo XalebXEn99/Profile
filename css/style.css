@@ -446,9 +446,16 @@ a:hover { opacity: 0.8; text-decoration: underline; }
   background: var(--btn-hover);
 }
 
-.embed-trigger:focus-visible {
+.embed-trigger:focus-visible,
+.project-link-preview:focus-visible {
   outline: var(--pixel-border) solid var(--accent);
   outline-offset: calc(-1 * var(--pixel-border));
+}
+
+.carousel-slide .project-link-preview img {
+  height: 100%;
+  border: none;
+  object-fit: contain;
 }
 
 .slide-link-gif {

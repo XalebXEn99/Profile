@@ -184,12 +184,6 @@ const projects = [
   },
 
   {
-    title: '404',
-    description: "NOT FOUND\n\nThe resource you are looking for is already being viewed.\n\nError code: PROFILE_ALREADY_OPEN\n\nYou're already here silly ^-^",
-    type: 'profile'
-  },
-
-  {
     title: "Brondon's Revenge (CGV Game)",
     description: 'A 3D game built with Three.js.',
     iframe: 'https://lamp.ms.wits.ac.za/students/sgroup3928/brondons-revenge/?muted=1',
@@ -221,6 +215,7 @@ const projects = [
     description: 'A repository analytics dashboard for exploring commit history, code churn, file changes and contributor activity.',
     link: 'https://rat.thestone.co.za/',
     linkLabel: 'Visit Live Site',
+    poster: 'assets/rat-preview.jpg',
     type: 'link'
   },
   {
@@ -238,6 +233,13 @@ const projects = [
     type: 'iframe'
   },
   {
+    title: 'Landwise \u2014 Farm intelligence',
+    description: 'A farm intelligence workspace bringing your land, conditions and next steps together.',
+    iframe: 'https://farm.thestone.co.za/',
+    liveLink: 'https://farm.thestone.co.za/',
+    type: 'iframe'
+  },
+  {
     title: 'Godot Games',
     description: 'Actively developing 2D games in Godot.',
     type: 'godot',
@@ -245,6 +247,11 @@ const projects = [
       { label: 'Xenzen2D (Top-down game)', url: 'https://github.com/xenzenok/xenzen2D', mp4: 'assets/xenzen2d.mp4' },
       { label: 'Xenzen SideScroller', url: 'https://github.com/xenzenok/xenzensidescroller', gif: 'assets/Spectrum.gif' }
     ]
+  },
+  {
+    title: '404',
+    description: "NOT FOUND\n\nThe resource you are looking for is already being viewed.\n\nError code: PROFILE_ALREADY_OPEN\n\nYou're already here silly ^-^",
+    type: 'profile'
   }
 ];
 
@@ -334,6 +341,12 @@ function buildCarousel() {
       `;
     } else if (project.type === 'link') {
       slide.innerHTML = `
+        ${project.poster ? `
+          <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-preview project-link-preview" aria-label="Open ${project.title} live site (new tab)">
+            <img data-src="${project.poster}" alt="${project.title} dashboard preview" loading="lazy" decoding="async">
+            <span class="embed-prompt">Open live site</span>
+          </a>
+        ` : ''}
         ${project.gif ? `<img data-src="${project.gif}" alt="${project.title} preview" class="slide-link-gif" loading="lazy" decoding="async">` : ''}
         <h2 class="slide-title">${project.title}</h2>
         ${project.description ? `<p class="slide-desc">${project.description}</p>` : ''}
